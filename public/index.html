@@ -1,371 +1,1965 @@
 <!DOCTYPE html>
 <html lang="my">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <meta
+    name="description"
+    content="Lynn Movie Recap - MP4 to SRT, AI Voice and Final MP4"
+  />
 
   <title>Lynn Movie Recap</title>
 
-  <link rel="stylesheet" href="/style.css">
+  <link
+    rel="stylesheet"
+    href="/style.css"
+  />
 </head>
 
 <body>
 
+<div class="app">
+
+  <!-- =================================================
+       HEADER
+  ================================================== -->
+
   <header class="header">
-    <div>
-      <h1>🎬 Lynn Movie Recap</h1>
-      <p>Movie Recap မြန်မာစာတန်းထိုး</p>
+
+    <div class="brand">
+
+      <div class="brand-logo">
+        LYNN
+      </div>
+
+      <div class="brand-text">
+        <h1>Lynn Movie Recap</h1>
+
+        <p>
+          Movie Recap • AI Voice • Myanmar Subtitle
+        </p>
+      </div>
+
     </div>
+
+    <div class="status-badge">
+      <span class="status-dot"></span>
+      System Online
+    </div>
+
   </header>
 
-  <main class="container">
 
-    <!-- MP4 TO SRT -->
+  <!-- =================================================
+       HERO
+  ================================================== -->
+
+  <section class="hero">
+
+    <h2>
+      Turn Your Movie Into a Recap
+    </h2>
+
+    <p>
+      MP4 တင်ပါ → SRT ထုတ်ပါ → AI Voice ပြောင်းပါ →
+      Subtitle / Blur / Logo ထည့်ပြီး Final MP4 ထုတ်ပါ။
+    </p>
+
+  </section>
+
+
+  <!-- =================================================
+       ALERT
+  ================================================== -->
+
+  <div
+    id="alert"
+    class="alert"
+  ></div>
+
+
+  <!-- =================================================
+       MAIN GRID
+  ================================================== -->
+
+  <main class="grid">
+
+
+    <!-- ===============================================
+         STEP 1 — UPLOAD
+    ================================================ -->
+
+    <section class="card full cinematic-glow">
+
+      <div class="card-header">
+
+        <div class="card-title">
+
+          <span class="step-number">
+            1
+          </span>
+
+          MP4 Video Upload
+
+        </div>
+
+      </div>
+
+
+      <div
+        id="uploadBox"
+        class="upload-box"
+      >
+
+        <div class="upload-icon">
+          🎬
+        </div>
+
+        <h3>
+          MP4 Video ရွေးပါ
+        </h3>
+
+        <p>
+          Click here or tap to select your MP4
+        </p>
+
+        <p class="hint">
+          Maximum file size: 25MB
+        </p>
+
+        <input
+          id="videoInput"
+          class="file-input"
+          type="file"
+          accept="video/mp4,.mp4"
+        />
+
+      </div>
+
+
+      <div
+        id="videoFileName"
+        class="file-name"
+      ></div>
+
+
+      <div class="button-row">
+
+        <button
+          id="transcribeBtn"
+          class="btn btn-primary"
+          disabled
+        >
+
+          <span class="btn-text">
+            🎙️ MP4 → SRT
+          </span>
+
+          <span class="btn-loading">
+            <span class="spinner"></span>
+            Processing...
+          </span>
+
+        </button>
+
+      </div>
+
+
+      <div
+        id="transcribeProgress"
+        class="progress-wrap"
+      >
+
+        <div class="progress-info">
+
+          <span>
+            Transcribing video...
+          </span>
+
+          <span>
+            AI
+          </span>
+
+        </div>
+
+        <div class="progress-bar">
+
+          <div
+            id="transcribeProgressFill"
+            class="progress-fill"
+          ></div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===============================================
+         STEP 2 — SRT
+    ================================================ -->
 
     <section class="card">
 
-      <h2>🎞️ MP4 → SRT</h2>
+      <div class="card-header">
 
-      <p class="description">
-        MP4 Video ထည့်ပြီး မြန်မာစာတန်းထိုး SRT ထုတ်ပါ။
-      </p>
+        <div class="card-title">
 
-      <input
-        id="videoFile"
-        type="file"
-        accept="video/mp4"
-      >
+          <span class="step-number">
+            2
+          </span>
 
-      <button
-        id="transcribeBtn"
-        onclick="transcribeVideo()"
-      >
-        🚀 SRT ထုတ်မယ်
-      </button>
+          SRT Subtitle
 
-      <div id="transcribeStatus"></div>
+        </div>
 
-      <textarea
-        id="srtOutput"
-        placeholder="SRT result ဒီနေရာမှာ ပေါ်လာပါမယ်..."
-        readonly
-      ></textarea>
+      </div>
 
-      <button
-        id="downloadSrtBtn"
-        class="secondary"
-        onclick="downloadSRT()"
-        disabled
-      >
-        📥 SRT Download
-      </button>
+
+      <div class="form-group">
+
+        <label
+          class="form-label"
+          for="srtText"
+        >
+          Generated SRT
+        </label>
+
+        <div class="output-box">
+
+          <textarea
+            id="srtText"
+            placeholder="MP4 ကို Transcribe လုပ်ပြီးရင် SRT ဒီနေရာမှာ ပေါ်လာပါမယ်..."
+          ></textarea>
+
+          <button
+            id="copySrtBtn"
+            class="copy-button"
+            type="button"
+          >
+            Copy
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <div class="button-row">
+
+        <button
+          id="downloadSrtBtn"
+          class="btn btn-secondary"
+          type="button"
+        >
+          ⬇️ Download SRT
+        </button>
+
+      </div>
 
     </section>
 
 
-    <!-- AI VOICE -->
+    <!-- ===============================================
+         STEP 3 — AI VOICE
+    ================================================ -->
 
     <section class="card">
 
-      <h2>🎙️ SRT → AI Voice</h2>
+      <div class="card-header">
 
-      <p class="description">
-        စာသားကို AI Voice အဖြစ် ပြောင်းနိုင်ပါတယ်။
-      </p>
+        <div class="card-title">
 
-      <textarea
-        id="voiceText"
-        placeholder="AI Voice ပြောင်းချင်တဲ့ စာသားထည့်ပါ..."
-      ></textarea>
+          <span class="step-number">
+            3
+          </span>
 
-      <label for="voiceSelect">
-        Voice
-      </label>
+          AI Voice
 
-      <select id="voiceSelect">
-        <option value="alloy">Alloy</option>
-        <option value="nova">Nova</option>
-        <option value="shimmer">Shimmer</option>
-        <option value="echo">Echo</option>
-        <option value="fable">Fable</option>
-        <option value="onyx">Onyx</option>
-      </select>
+        </div>
 
-      <button
-        id="voiceBtn"
-        onclick="generateVoice()"
+      </div>
+
+
+      <div class="form-group">
+
+        <label
+          class="form-label"
+          for="voiceSelect"
+        >
+          Voice
+        </label>
+
+        <select
+          id="voiceSelect"
+        >
+
+          <option value="alloy">
+            Alloy
+          </option>
+
+          <option value="nova">
+            Nova
+          </option>
+
+          <option value="shimmer">
+            Shimmer
+          </option>
+
+          <option value="echo">
+            Echo
+          </option>
+
+          <option value="fable">
+            Fable
+          </option>
+
+          <option value="onyx">
+            Onyx
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label
+          class="form-label"
+          for="voiceText"
+        >
+          AI Voice Script
+        </label>
+
+        <textarea
+          id="voiceText"
+          placeholder="ဒီနေရာမှာ Movie Recap ပြောမယ့် Script ကို ထည့်ပါ..."
+        ></textarea>
+
+      </div>
+
+
+      <div class="button-row">
+
+        <button
+          id="ttsBtn"
+          class="btn btn-gold"
+          type="button"
+        >
+
+          <span class="btn-text">
+            🔊 Generate AI Voice
+          </span>
+
+          <span class="btn-loading">
+            <span class="spinner"></span>
+            Generating...
+          </span>
+
+        </button>
+
+      </div>
+
+
+      <div
+        id="audioBox"
+        class="audio-box hidden"
       >
-        🔊 AI Voice ထုတ်မယ်
-      </button>
 
-      <div id="voiceStatus"></div>
+        <audio
+          id="audioPlayer"
+          controls
+        ></audio>
 
-      <audio
-        id="audioPlayer"
-        controls
-        style="display:none;"
-      ></audio>
+      </div>
 
     </section>
 
 
-    <!-- INFO -->
+    <!-- ===============================================
+         STEP 4 — SUBTITLE OPTIONS
+    ================================================ -->
 
-    <section class="card info">
+    <section class="card">
 
-      <h2>ℹ️ Lynn Movie Recap</h2>
+      <div class="card-header">
 
-      <p>
-        🎬 Movie Recap မြန်မာစာတန်းထိုး
-      </p>
+        <div class="card-title">
 
-      <p>
-        🍿 ဇာတ်ကားကောင်းများကို အတိုချုံးတင်ဆက်ပေးနေပါတယ်။
-      </p>
+          <span class="step-number">
+            4
+          </span>
+
+          Subtitle Settings
+
+        </div>
+
+      </div>
+
+
+      <div class="option-section">
+
+        <div class="options-title">
+          Myanmar Subtitle
+        </div>
+
+
+        <div class="form-grid">
+
+
+          <div class="form-group">
+
+            <label class="form-label">
+              Font Size
+            </label>
+
+            <div class="range-row">
+
+              <input
+                id="subtitleSize"
+                type="range"
+                min="12"
+                max="80"
+                value="28"
+              />
+
+              <span
+                id="subtitleSizeValue"
+                class="range-value"
+              >
+                28
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label class="form-label">
+              Bottom Margin
+            </label>
+
+            <div class="range-row">
+
+              <input
+                id="subtitleMargin"
+                type="range"
+                min="10"
+                max="300"
+                value="80"
+              />
+
+              <span
+                id="subtitleMarginValue"
+                class="range-value"
+              >
+                80
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label class="form-label">
+              Outline
+            </label>
+
+            <div class="range-row">
+
+              <input
+                id="subtitleOutline"
+                type="range"
+                min="0"
+                max="10"
+                value="3"
+              />
+
+              <span
+                id="subtitleOutlineValue"
+                class="range-value"
+              >
+                3
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label class="form-label">
+              Subtitle Color
+            </label>
+
+            <div class="color-row">
+
+              <input
+                id="subtitleColor"
+                type="color"
+                value="#ffffff"
+              />
+
+              <span
+                id="subtitleColorText"
+                class="text-muted"
+              >
+                #FFFFFF
+              </span>
+
+            </div>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+
+      <div class="option-section">
+
+        <div class="options-title">
+          Video Effects
+        </div>
+
+
+        <div class="form-group">
+
+          <div class="check-row">
+
+            <input
+              id="blurEnabled"
+              type="checkbox"
+            />
+
+            <label for="blurEnabled">
+              🎞️ Video Blur
+            </label>
+
+          </div>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <div class="check-row">
+
+            <input
+              id="logoEnabled"
+              type="checkbox"
+            />
+
+            <label for="logoEnabled">
+              🏷️ Add Lynn Logo
+            </label>
+
+          </div>
+
+        </div>
+
+
+        <div
+          id="logoOptions"
+          class="hidden"
+        >
+
+          <div class="form-group">
+
+            <label class="form-label">
+              Logo Position
+            </label>
+
+            <select id="logoPosition">
+
+              <option value="top-right">
+                Top Right
+              </option>
+
+              <option value="top-left">
+                Top Left
+              </option>
+
+              <option value="bottom-right">
+                Bottom Right
+              </option>
+
+              <option value="bottom-left">
+                Bottom Left
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label class="form-label">
+              Logo PNG
+            </label>
+
+            <input
+              id="logoInput"
+              type="file"
+              accept="image/png,image/jpeg"
+            />
+
+          </div>
+
+        </div>
+
+      </div>
 
     </section>
+
+
+    <!-- ===============================================
+         STEP 5 — FINAL RENDER
+    ================================================ -->
+
+    <section class="card full cinematic-glow">
+
+      <div class="card-header">
+
+        <div class="card-title">
+
+          <span class="step-number">
+            5
+          </span>
+
+          Final MP4 Render
+
+        </div>
+
+      </div>
+
+
+      <p class="text-muted">
+
+        Video + SRT + AI Voice + Subtitle + Effects
+        အားလုံးကို ပေါင်းပြီး Final MP4 ထုတ်ပါမယ်။
+
+      </p>
+
+
+      <div class="button-row">
+
+        <button
+          id="renderBtn"
+          class="btn btn-primary"
+          type="button"
+          disabled
+        >
+
+          <span class="btn-text">
+            🎬 Create Final MP4
+          </span>
+
+          <span class="btn-loading">
+
+            <span class="spinner"></span>
+
+            Rendering...
+
+          </span>
+
+        </button>
+
+      </div>
+
+
+      <div
+        id="renderProgress"
+        class="progress-wrap"
+      >
+
+        <div class="progress-info">
+
+          <span>
+            Rendering Final MP4...
+          </span>
+
+          <span>
+            FFmpeg
+          </span>
+
+        </div>
+
+        <div class="progress-bar">
+
+          <div
+            id="renderProgressFill"
+            class="progress-fill"
+          ></div>
+
+        </div>
+
+      </div>
+
+
+      <div
+        id="result"
+        class="result"
+      >
+
+        <h3>
+          ✅ Final MP4 ပြီးပါပြီ
+        </h3>
+
+        <p>
+          Lynn Movie Recap video ကို Download လုပ်နိုင်ပါပြီ။
+        </p>
+
+        <a
+          id="downloadFinalBtn"
+          class="btn btn-success download-btn"
+          href="#"
+          target="_blank"
+        >
+          ⬇️ Download Final MP4
+        </a>
+
+      </div>
+
+    </section>
+
 
   </main>
 
 
-  <footer>
-    © 2026 Lynn Movie Recap
+  <!-- =================================================
+       FOOTER
+  ================================================== -->
+
+  <footer class="footer">
+
+    <strong>
+      Lynn Movie Recap
+    </strong>
+
+    <br />
+
+    Movie Recap • AI Voice • Myanmar Subtitle
+
   </footer>
 
+</div>
+
+
+<!-- ===================================================
+     JAVASCRIPT
+=================================================== -->
 
 <script>
 
-let latestSRT = "";
+  /* =================================================
+     ELEMENTS
+  ================================================= */
 
-
-/* -----------------------------
-   MP4 → SRT
------------------------------ */
-
-async function transcribeVideo() {
-
-  const fileInput =
-    document.getElementById("videoFile");
-
-  const status =
-    document.getElementById("transcribeStatus");
-
-  const button =
-    document.getElementById("transcribeBtn");
-
-  const output =
-    document.getElementById("srtOutput");
-
-  const file =
-    fileInput.files[0];
-
-  if (!file) {
-
-    status.innerText =
-      "⚠️ MP4 Video ရွေးပေးပါ။";
-
-    return;
-  }
-
-  const formData =
-    new FormData();
-
-  formData.append(
-    "video",
-    file
-  );
-
-  button.disabled = true;
-
-  status.innerText =
-    "⏳ Video ကို စစ်ဆေးပြီး SRT ထုတ်နေပါတယ်...";
-
-  output.value = "";
-
-  try {
-
-    const response =
-      await fetch(
-        "/api/transcribe",
-        {
-          method: "POST",
-          body: formData
-        }
-      );
-
-    const data =
-      await response.json();
-
-    if (!response.ok) {
-
-      throw new Error(
-        data.error ||
-        "Transcription failed"
-      );
-    }
-
-    latestSRT =
-      data.srt || "";
-
-    output.value =
-      latestSRT;
-
-    status.innerText =
-      `✅ SRT ပြီးပါပြီ။ ${data.segments || 0} segments`;
-
-    document
-      .getElementById("downloadSrtBtn")
-      .disabled = !latestSRT;
-
-  } catch (error) {
-
-    status.innerText =
-      "❌ " + error.message;
-
-  } finally {
-
-    button.disabled = false;
-  }
-}
-
-
-/* -----------------------------
-   Download SRT
------------------------------ */
-
-function downloadSRT() {
-
-  if (!latestSRT) {
-    return;
-  }
-
-  const blob =
-    new Blob(
-      [latestSRT],
-      {
-        type: "text/plain;charset=utf-8"
-      }
+  const videoInput =
+    document.getElementById(
+      "videoInput"
     );
 
-  const url =
-    URL.createObjectURL(blob);
+  const videoFileName =
+    document.getElementById(
+      "videoFileName"
+    );
 
-  const link =
-    document.createElement("a");
+  const transcribeBtn =
+    document.getElementById(
+      "transcribeBtn"
+    );
 
-  link.href = url;
+  const srtText =
+    document.getElementById(
+      "srtText"
+    );
 
-  link.download =
-    "lynn-movie-recap.srt";
+  const copySrtBtn =
+    document.getElementById(
+      "copySrtBtn"
+    );
 
-  link.click();
+  const downloadSrtBtn =
+    document.getElementById(
+      "downloadSrtBtn"
+    );
 
-  URL.revokeObjectURL(url);
-}
+  const voiceText =
+    document.getElementById(
+      "voiceText"
+    );
+
+  const voiceSelect =
+    document.getElementById(
+      "voiceSelect"
+    );
+
+  const ttsBtn =
+    document.getElementById(
+      "ttsBtn"
+    );
+
+  const audioBox =
+    document.getElementById(
+      "audioBox"
+    );
+
+  const audioPlayer =
+    document.getElementById(
+      "audioPlayer"
+    );
+
+  const renderBtn =
+    document.getElementById(
+      "renderBtn"
+    );
+
+  const logoEnabled =
+    document.getElementById(
+      "logoEnabled"
+    );
+
+  const logoOptions =
+    document.getElementById(
+      "logoOptions"
+    );
+
+  const logoInput =
+    document.getElementById(
+      "logoInput"
+    );
+
+  const alertBox =
+    document.getElementById(
+      "alert"
+    );
+
+  const resultBox =
+    document.getElementById(
+      "result"
+    );
+
+  const downloadFinalBtn =
+    document.getElementById(
+      "downloadFinalBtn"
+    );
 
 
-/* -----------------------------
-   AI VOICE
------------------------------ */
+  /* =================================================
+     HELPERS
+  ================================================= */
 
-async function generateVoice() {
+  function showAlert(
+    message,
+    type = "error"
+  ) {
 
-  const text =
-    document
-      .getElementById("voiceText")
-      .value
-      .trim();
+    alertBox.textContent =
+      message;
 
-  const voice =
-    document
-      .getElementById("voiceSelect")
-      .value;
+    alertBox.className =
+      "alert show " + type;
 
-  const button =
-    document.getElementById("voiceBtn");
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
 
-  const status =
-    document.getElementById("voiceStatus");
-
-  const player =
-    document.getElementById("audioPlayer");
-
-  if (!text) {
-
-    status.innerText =
-      "⚠️ AI Voice ပြောင်းမယ့် စာသားထည့်ပါ။";
-
-    return;
   }
 
-  button.disabled = true;
 
-  status.innerText =
-    "⏳ AI Voice ထုတ်နေပါတယ်...";
+  function hideAlert() {
 
-  player.style.display =
-    "none";
+    alertBox.className =
+      "alert";
 
-  try {
+    alertBox.textContent = "";
 
-    const response =
-      await fetch(
-        "/api/tts",
-        {
-          method: "POST",
+  }
 
-          headers: {
-            "Content-Type":
-              "application/json"
-          },
 
-          body: JSON.stringify({
-            text,
-            voice
-          })
-        }
+  function setLoading(
+    button,
+    loading
+  ) {
+
+    if (loading) {
+
+      button.classList.add(
+        "loading"
       );
 
-    if (!response.ok) {
+      button.disabled = true;
 
-      const data =
-        await response.json();
+    } else {
 
-      throw new Error(
-        data.error ||
-        "TTS failed"
+      button.classList.remove(
+        "loading"
       );
+
+      button.disabled = false;
+
     }
 
-    const audioBlob =
-      await response.blob();
+  }
 
-    const audioUrl =
-      URL.createObjectURL(
-        audioBlob
+
+  function sleep(ms) {
+
+    return new Promise(
+      resolve =>
+        setTimeout(
+          resolve,
+          ms
+        )
+    );
+
+  }
+
+
+  /* =================================================
+     VIDEO SELECT
+  ================================================= */
+
+  videoInput.addEventListener(
+    "change",
+    () => {
+
+      const file =
+        videoInput.files[0];
+
+      if (!file) {
+
+        videoFileName.classList.remove(
+          "show"
+        );
+
+        transcribeBtn.disabled =
+          true;
+
+        renderBtn.disabled =
+          true;
+
+        return;
+
+      }
+
+
+      if (
+        !file.name
+          .toLowerCase()
+          .endsWith(".mp4")
+      ) {
+
+        showAlert(
+          "MP4 file ပဲရွေးပါ။"
+        );
+
+        videoInput.value = "";
+
+        return;
+
+      }
+
+
+      const maxSize =
+        25 * 1024 * 1024;
+
+      if (
+        file.size > maxSize
+      ) {
+
+        showAlert(
+          "Video file သည် 25MB ထက်မကျော်ရပါ။"
+        );
+
+        videoInput.value = "";
+
+        return;
+
+      }
+
+
+      videoFileName.textContent =
+        "🎬 " +
+        file.name +
+        " • " +
+        formatFileSize(
+          file.size
+        );
+
+      videoFileName.classList.add(
+        "show"
       );
 
-    player.src =
-      audioUrl;
+      transcribeBtn.disabled =
+        false;
 
-    player.style.display =
-      "block";
+      hideAlert();
 
-    status.innerText =
-      "✅ AI Voice ပြီးပါပြီ။";
+    }
+  );
 
-  } catch (error) {
 
-    status.innerText =
-      "❌ " + error.message;
+  /* =================================================
+     MP4 → SRT
+  ================================================= */
 
-  } finally {
+  transcribeBtn.addEventListener(
+    "click",
+    async () => {
 
-    button.disabled = false;
+      const file =
+        videoInput.files[0];
+
+      if (!file) {
+
+        showAlert(
+          "MP4 video ရွေးပါ။"
+        );
+
+        return;
+
+      }
+
+
+      hideAlert();
+
+      setLoading(
+        transcribeBtn,
+        true
+      );
+
+
+      const progress =
+        document.getElementById(
+          "transcribeProgress"
+        );
+
+      const progressFill =
+        document.getElementById(
+          "transcribeProgressFill"
+        );
+
+
+      progress.classList.add(
+        "show"
+      );
+
+      progressFill.style.width =
+        "15%";
+
+
+      const formData =
+        new FormData();
+
+      formData.append(
+        "video",
+        file
+      );
+
+
+      try {
+
+        progressFill.style.width =
+          "35%";
+
+
+        const response =
+          await fetch(
+            "/api/transcribe",
+            {
+              method: "POST",
+              body: formData
+            }
+          );
+
+
+        progressFill.style.width =
+          "75%";
+
+
+        const data =
+          await response.json();
+
+
+        if (!response.ok) {
+
+          throw new Error(
+            data.error ||
+            "Transcription failed"
+          );
+
+        }
+
+
+        srtText.value =
+          data.srt || "";
+
+
+        if (
+          !voiceText.value.trim() &&
+          data.text
+        ) {
+
+          voiceText.value =
+            data.text;
+
+        }
+
+
+        progressFill.style.width =
+          "100%";
+
+
+        showAlert(
+          "✅ SRT ထုတ်ပြီးပါပြီ။",
+          "success"
+        );
+
+
+        updateRenderButton();
+
+
+      } catch (error) {
+
+        console.error(error);
+
+        showAlert(
+          error.message ||
+          "Transcription failed"
+        );
+
+      } finally {
+
+        setLoading(
+          transcribeBtn,
+          false
+        );
+
+        setTimeout(
+          () => {
+
+            progress.classList.remove(
+              "show"
+            );
+
+            progressFill.style.width =
+              "0%";
+
+          },
+          1000
+        );
+
+      }
+
+    }
+  );
+
+
+  /* =================================================
+     COPY SRT
+  ================================================= */
+
+  copySrtBtn.addEventListener(
+    "click",
+    async () => {
+
+      const text =
+        srtText.value.trim();
+
+      if (!text) {
+
+        showAlert(
+          "Copy လုပ်ရန် SRT မရှိသေးပါ။"
+        );
+
+        return;
+
+      }
+
+
+      try {
+
+        await navigator.clipboard.writeText(
+          text
+        );
+
+        copySrtBtn.textContent =
+          "Copied ✓";
+
+
+        setTimeout(
+          () => {
+
+            copySrtBtn.textContent =
+              "Copy";
+
+          },
+          1500
+        );
+
+      } catch {
+
+        srtText.select();
+
+        document.execCommand(
+          "copy"
+        );
+
+      }
+
+    }
+  );
+
+
+  /* =================================================
+     DOWNLOAD SRT
+  ================================================= */
+
+  downloadSrtBtn.addEventListener(
+    "click",
+    async () => {
+
+      const srt =
+        srtText.value.trim();
+
+      if (!srt) {
+
+        showAlert(
+          "Download လုပ်ရန် SRT မရှိသေးပါ။"
+        );
+
+        return;
+
+      }
+
+
+      try {
+
+        const response =
+          await fetch(
+            "/api/download-srt",
+            {
+              method: "POST",
+
+              headers: {
+                "Content-Type":
+                  "application/json"
+              },
+
+              body: JSON.stringify({
+                srt
+              })
+            }
+          );
+
+
+        if (!response.ok) {
+
+          const data =
+            await response.json();
+
+          throw new Error(
+            data.error ||
+            "SRT download failed"
+          );
+
+        }
+
+
+        const blob =
+          await response.blob();
+
+        const url =
+          URL.createObjectURL(
+            blob
+          );
+
+        const a =
+          document.createElement(
+            "a"
+          );
+
+        a.href = url;
+
+        a.download =
+          "lynn-movie-recap.srt";
+
+        document.body.appendChild(
+          a
+        );
+
+        a.click();
+
+        a.remove();
+
+        URL.revokeObjectURL(
+          url
+        );
+
+      } catch (error) {
+
+        showAlert(
+          error.message
+        );
+
+      }
+
+    }
+  );
+
+
+  /* =================================================
+     AI VOICE
+  ================================================= */
+
+  ttsBtn.addEventListener(
+    "click",
+    async () => {
+
+      const text =
+        voiceText.value.trim();
+
+      const voice =
+        voiceSelect.value;
+
+
+      if (!text) {
+
+        showAlert(
+          "AI Voice Script ထည့်ပါ။"
+        );
+
+        return;
+
+      }
+
+
+      hideAlert();
+
+      setLoading(
+        ttsBtn,
+        true
+      );
+
+
+      try {
+
+        const response =
+          await fetch(
+            "/api/tts",
+            {
+              method: "POST",
+
+              headers: {
+                "Content-Type":
+                  "application/json"
+              },
+
+              body: JSON.stringify({
+                text,
+                voice
+              })
+            }
+          );
+
+
+        if (!response.ok) {
+
+          const data =
+            await response.json();
+
+          throw new Error(
+            data.error ||
+            "AI Voice failed"
+          );
+
+        }
+
+
+        const blob =
+          await response.blob();
+
+        const url =
+          URL.createObjectURL(
+            blob
+          );
+
+
+        audioPlayer.src =
+          url;
+
+        audioBox.classList.remove(
+          "hidden"
+        );
+
+
+        showAlert(
+          "🔊 AI Voice ပြီးပါပြီ။",
+          "success"
+        );
+
+
+        updateRenderButton();
+
+
+      } catch (error) {
+
+        console.error(error);
+
+        showAlert(
+          error.message ||
+          "AI Voice failed"
+        );
+
+      } finally {
+
+        setLoading(
+          ttsBtn,
+          false
+        );
+
+      }
+
+    }
+  );
+
+
+  /* =================================================
+     LOGO TOGGLE
+  ================================================= */
+
+  logoEnabled.addEventListener(
+    "change",
+    () => {
+
+      if (
+        logoEnabled.checked
+      ) {
+
+        logoOptions.classList.remove(
+          "hidden"
+        );
+
+      } else {
+
+        logoOptions.classList.add(
+          "hidden"
+        );
+
+      }
+
+    }
+  );
+
+
+  /* =================================================
+     SUBTITLE RANGE
+  ================================================= */
+
+  const subtitleSize =
+    document.getElementById(
+      "subtitleSize"
+    );
+
+  const subtitleSizeValue =
+    document.getElementById(
+      "subtitleSizeValue"
+    );
+
+
+  subtitleSize.addEventListener(
+    "input",
+    () => {
+
+      subtitleSizeValue.textContent =
+        subtitleSize.value;
+
+    }
+  );
+
+
+  const subtitleMargin =
+    document.getElementById(
+      "subtitleMargin"
+    );
+
+  const subtitleMarginValue =
+    document.getElementById(
+      "subtitleMarginValue"
+    );
+
+
+  subtitleMargin.addEventListener(
+    "input",
+    () => {
+
+      subtitleMarginValue.textContent =
+        subtitleMargin.value;
+
+    }
+  );
+
+
+  const subtitleOutline =
+    document.getElementById(
+      "subtitleOutline"
+    );
+
+  const subtitleOutlineValue =
+    document.getElementById(
+      "subtitleOutlineValue"
+    );
+
+
+  subtitleOutline.addEventListener(
+    "input",
+    () => {
+
+      subtitleOutlineValue.textContent =
+        subtitleOutline.value;
+
+    }
+  );
+
+
+  /* =================================================
+     COLOR
+  ================================================= */
+
+  const subtitleColor =
+    document.getElementById(
+      "subtitleColor"
+    );
+
+  const subtitleColorText =
+    document.getElementById(
+      "subtitleColorText"
+    );
+
+
+  subtitleColor.addEventListener(
+    "input",
+    () => {
+
+      subtitleColorText.textContent =
+        subtitleColor.value
+          .toUpperCase();
+
+    }
+  );
+
+
+  /* =================================================
+     UPDATE RENDER BUTTON
+  ================================================= */
+
+  function updateRenderButton() {
+
+    const video =
+      videoInput.files[0];
+
+    const srt =
+      srtText.value.trim();
+
+    const script =
+      voiceText.value.trim();
+
+
+    renderBtn.disabled =
+      !video ||
+      !srt ||
+      !script;
+
   }
-}
+
+
+  videoInput.addEventListener(
+    "change",
+    updateRenderButton
+  );
+
+  srtText.addEventListener(
+    "input",
+    updateRenderButton
+  );
+
+  voiceText.addEventListener(
+    "input",
+    updateRenderButton
+  );
+
+
+  /* =================================================
+     FINAL RENDER
+  ================================================= */
+
+  renderBtn.addEventListener(
+    "click",
+    async () => {
+
+      const video =
+        videoInput.files[0];
+
+      const srt =
+        srtText.value.trim();
+
+      const script =
+        voiceText.value.trim();
+
+
+      if (!video) {
+
+        showAlert(
+          "MP4 video ရွေးပါ။"
+        );
+
+        return;
+
+      }
+
+
+      if (!srt) {
+
+        showAlert(
+          "SRT မရှိသေးပါ။"
+        );
+
+        return;
+
+      }
+
+
+      if (!script) {
+
+        showAlert(
+          "AI Voice Script မရှိသေးပါ။"
+        );
+
+        return;
+
+      }
+
+
+      hideAlert();
+
+      setLoading(
+        renderBtn,
+        true
+      );
+
+
+      const progress =
+        document.getElementById(
+          "renderProgress"
+        );
+
+      const progressFill =
+        document.getElementById(
+          "renderProgressFill"
+        );
+
+
+      progress.classList.add(
+        "show"
+      );
+
+
+      progressFill.style.width =
+        "10%";
+
+
+      const formData =
+        new FormData();
+
+
+      formData.append(
+        "video",
+        video
+      );
+
+      formData.append(
+        "srt",
+        srt
+      );
+
+      formData.append(
+        "voiceText",
+        script
+      );
+
+      formData.append(
+        "voice",
+        voiceSelect.value
+      );
+
+      formData.append(
+        "subtitleSize",
+        subtitleSize.value
+      );
+
+      formData.append(
+        "subtitleMargin",
+        subtitleMargin.value
+      );
+
+      formData.append(
+        "subtitleOutline",
+        subtitleOutline.value
+      );
+
+
+      const color =
+        subtitleColor.value
+          .replace("#", "")
+          .toUpperCase();
+
+
+      formData.append(
+        "subtitleColor",
+        color
+      );
+
+      formData.append(
+        "blur",
+        document.getElementById(
+          "blurEnabled"
+        ).checked
+          ? "true"
+          : "false"
+      );
+
+      formData.append(
+        "logoEnabled",
+        logoEnabled.checked
+          ? "true"
+          : "false"
+      );
+
+      formData.append(
+        "logoPosition",
+        document.getElementById(
+          "logoPosition"
+        ).value
+      );
+
+
+      if (
+        logoEnabled.checked &&
+        logoInput.files[0]
+      ) {
+
+        formData.append(
+          "logo",
+          logoInput.files[0]
+        );
+
+      }
+
+
+      try {
+
+        progressFill.style.width =
+          "25%";
+
+
+        const response =
+          await fetch(
+            "/api/render",
+            {
+              method: "POST",
+              body: formData
+            }
+          );
+
+
+        progressFill.style.width =
+          "60%";
+
+
+        const data =
+          await response.json();
+
+
+        if (!response.ok) {
+
+          throw new Error(
+            data.error ||
+            "Render failed"
+          );
+
+        }
+
+
+        progressFill.style.width =
+          "100%";
+
+
+        downloadFinalBtn.href =
+          data.download;
+
+
+        resultBox.classList.add(
+          "show"
+        );
+
+
+        showAlert(
+          "🎬 Final MP4 ပြီးပါပြီ။",
+          "success"
+        );
+
+
+        resultBox.scrollIntoView({
+          behavior: "smooth",
+          block: "center"
+        });
+
+
+      } catch (error) {
+
+        console.error(error);
+
+        showAlert(
+          error.message ||
+          "Final render failed"
+        );
+
+      } finally {
+
+        setLoading(
+          renderBtn,
+          false
+        );
+
+
+        setTimeout(
+          () => {
+
+            progress.classList.remove(
+              "show"
+            );
+
+            progressFill.style.width =
+              "0%";
+
+          },
+          1200
+        );
+
+      }
+
+    }
+  );
+
+
+  /* =================================================
+     FILE SIZE
+  ================================================= */
+
+  function formatFileSize(
+    bytes
+  ) {
+
+    if (
+      bytes < 1024
+    ) {
+
+      return (
+        bytes +
+        " B"
+      );
+
+    }
+
+
+    if (
+      bytes < 1024 * 1024
+    ) {
+
+      return (
+        (bytes / 1024)
+          .toFixed(1) +
+        " KB"
+      );
+
+    }
+
+
+    return (
+      (bytes /
+        (1024 * 1024))
+        .toFixed(1) +
+      " MB"
+    );
+
+  }
+
+
+  /* =================================================
+     HEALTH CHECK
+  ================================================= */
+
+  async function checkHealth() {
+
+    try {
+
+      const response =
+        await fetch(
+          "/api/health"
+        );
+
+
+      if (!response.ok) {
+
+        throw new Error(
+          "Server offline"
+        );
+
+      }
+
+      console.log(
+        "Lynn Movie Recap API: Online"
+      );
+
+    } catch (error) {
+
+      console.error(
+        "Health check failed:",
+        error
+      );
+
+    }
+
+  }
+
+
+  /* =================================================
+     INITIAL
+  ================================================= */
+
+  checkHealth();
+
+  updateRenderButton();
 
 </script>
 
 </body>
-      </html>
+</html>
