@@ -1,0 +1,423 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family:
+    "Noto Sans Myanmar",
+    "Myanmar Text",
+    Arial,
+    sans-serif;
+
+  background:
+    linear-gradient(
+      135deg,
+      #080808,
+      #151515,
+      #050505
+    );
+
+  color: #ffffff;
+  min-height: 100vh;
+}
+
+
+/* -----------------------------
+   HEADER
+----------------------------- */
+
+.header {
+  width: 100%;
+  padding: 28px 20px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #111111,
+      #202020
+    );
+
+  border-bottom:
+    1px solid rgba(255, 193, 7, 0.25);
+
+  box-shadow:
+    0 4px 25px rgba(0, 0, 0, 0.5);
+}
+
+.header div {
+  max-width: 900px;
+  margin: auto;
+}
+
+.header h1 {
+  margin: 0;
+
+  font-size: 30px;
+  font-weight: 800;
+
+  letter-spacing: 0.5px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #ffd54a,
+      #ffffff,
+      #ffca28
+    );
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.header p {
+  margin: 8px 0 0;
+
+  color: #bbbbbb;
+  font-size: 14px;
+}
+
+
+/* -----------------------------
+   CONTAINER
+----------------------------- */
+
+.container {
+  width: 100%;
+  max-width: 900px;
+
+  margin: 0 auto;
+  padding: 25px 15px 50px;
+}
+
+
+/* -----------------------------
+   CARD
+----------------------------- */
+
+.card {
+  background:
+    rgba(24, 24, 24, 0.95);
+
+  border:
+    1px solid rgba(255, 255, 255, 0.08);
+
+  border-radius: 18px;
+
+  padding: 24px;
+
+  margin-bottom: 20px;
+
+  box-shadow:
+    0 12px 35px rgba(0, 0, 0, 0.45);
+
+  backdrop-filter: blur(10px);
+}
+
+.card h2 {
+  margin-top: 0;
+  margin-bottom: 8px;
+
+  font-size: 21px;
+}
+
+.description {
+  color: #aaa;
+  font-size: 14px;
+
+  margin-bottom: 20px;
+}
+
+
+/* -----------------------------
+   INPUT
+----------------------------- */
+
+input[type="file"] {
+  width: 100%;
+
+  padding: 14px;
+
+  background: #101010;
+
+  border:
+    1px dashed #555;
+
+  border-radius: 10px;
+
+  color: #ddd;
+
+  margin-bottom: 15px;
+
+  cursor: pointer;
+}
+
+
+/* -----------------------------
+   TEXTAREA
+----------------------------- */
+
+textarea {
+  width: 100%;
+
+  min-height: 160px;
+
+  resize: vertical;
+
+  padding: 15px;
+
+  margin-top: 12px;
+
+  border:
+    1px solid #333;
+
+  border-radius: 12px;
+
+  background: #0d0d0d;
+
+  color: #ffffff;
+
+  font-family:
+    "Noto Sans Myanmar",
+    "Myanmar Text",
+    Arial,
+    sans-serif;
+
+  font-size: 14px;
+
+  line-height: 1.7;
+
+  outline: none;
+}
+
+textarea:focus {
+  border-color: #ffc107;
+
+  box-shadow:
+    0 0 0 2px
+    rgba(255, 193, 7, 0.12);
+}
+
+
+/* -----------------------------
+   SELECT
+----------------------------- */
+
+label {
+  display: block;
+
+  margin-top: 15px;
+  margin-bottom: 7px;
+
+  color: #bbb;
+
+  font-size: 14px;
+}
+
+select {
+  width: 100%;
+
+  padding: 13px;
+
+  background: #0d0d0d;
+
+  color: #fff;
+
+  border:
+    1px solid #333;
+
+  border-radius: 10px;
+
+  font-size: 15px;
+
+  outline: none;
+}
+
+select:focus {
+  border-color: #ffc107;
+}
+
+
+/* -----------------------------
+   BUTTON
+----------------------------- */
+
+button {
+  width: 100%;
+
+  margin-top: 14px;
+
+  padding: 14px 18px;
+
+  border: none;
+
+  border-radius: 11px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ffca28,
+      #ff9800
+    );
+
+  color: #111;
+
+  font-size: 15px;
+
+  font-weight: 800;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.15s ease,
+    opacity 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+button:hover {
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 8px 20px
+    rgba(255, 193, 7, 0.18);
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+button:disabled {
+  opacity: 0.45;
+
+  cursor: not-allowed;
+
+  transform: none;
+
+  box-shadow: none;
+}
+
+button.secondary {
+  background: #292929;
+
+  color: #ffffff;
+
+  border:
+    1px solid #444;
+}
+
+button.secondary:hover {
+  background: #333;
+}
+
+
+/* -----------------------------
+   STATUS
+----------------------------- */
+
+#transcribeStatus,
+#voiceStatus {
+  margin-top: 15px;
+
+  padding: 10px 12px;
+
+  border-radius: 9px;
+
+  color: #d8d8d8;
+
+  font-size: 14px;
+
+  line-height: 1.6;
+}
+
+
+/* -----------------------------
+   AUDIO
+----------------------------- */
+
+audio {
+  width: 100%;
+
+  margin-top: 18px;
+
+  border-radius: 10px;
+}
+
+
+/* -----------------------------
+   INFO
+----------------------------- */
+
+.info {
+  text-align: center;
+}
+
+.info p {
+  color: #aaa;
+
+  font-size: 14px;
+
+  line-height: 1.8;
+
+  margin: 6px 0;
+}
+
+
+/* -----------------------------
+   FOOTER
+----------------------------- */
+
+footer {
+  text-align: center;
+
+  padding: 25px 15px 35px;
+
+  color: #666;
+
+  font-size: 13px;
+
+  border-top:
+    1px solid rgba(255,255,255,0.05);
+}
+
+
+/* -----------------------------
+   MOBILE
+----------------------------- */
+
+@media (max-width: 600px) {
+
+  .header {
+    padding: 22px 15px;
+  }
+
+  .header h1 {
+    font-size: 24px;
+  }
+
+  .container {
+    padding:
+      18px 10px 40px;
+  }
+
+  .card {
+    padding: 18px;
+
+    border-radius: 15px;
+  }
+
+  .card h2 {
+    font-size: 19px;
+  }
+
+  textarea {
+    min-height: 140px;
+  }
+
+  button {
+    padding: 14px;
+  }
+  }
