@@ -4,8 +4,8 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends \
     ffmpeg \
     fonts-noto-core \
-    fonts-noto-cjk && \
-    rm -rf /var/lib/apt/lists/*
+    fonts-noto-cjk \
+    && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
