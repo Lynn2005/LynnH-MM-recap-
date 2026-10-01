@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: lynn-movie-recap
+    runtime: docker
+    plan: free
+    branch: main
+    healthCheckPath: /api/health
+
+    envVars:
+      - key: OPENAI_API_KEY
+        sync: false
+
+      - key: MAX_FILES_PER_BATCH
+        value: "20"
+
+      - key: MAX_FILE_MB
+        value: "25"
+
+      - key: CONCURRENCY
+        value: "2"
