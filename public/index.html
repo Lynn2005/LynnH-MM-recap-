@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Lynn Movie Recap</title>
+
+  <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+
+  <header class="header">
+    <div>
+      <h1>🎬 Lynn Movie Recap</h1>
+      <p>Movie Recap မြန်မာစာတန်းထိုး</p>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- MP4 TO SRT -->
+
+    <section class="card">
+
+      <h2>🎞️ MP4 → SRT</h2>
+
+      <p class="description">
+        MP4 Video ထည့်ပြီး မြန်မာစာတန်းထိုး SRT ထုတ်ပါ။
+      </p>
+
+      <input
+        id="videoFile"
+        type="file"
+        accept="video/mp4"
+      >
+
+      <button
+        id="transcribeBtn"
+        onclick="transcribeVideo()"
+      >
+        🚀 SRT ထုတ်မယ်
+      </button>
+
+      <div id="transcribeStatus"></div>
+
+      <textarea
+        id="srtOutput"
+        placeholder="SRT result ဒီနေရာမှာ ပေါ်လာပါမယ်..."
+        readonly
+      ></textarea>
+
+      <button
+        id="downloadSrtBtn"
+        class="secondary"
+        onclick="downloadSRT()"
+        disabled
+      >
+        📥 SRT Download
+      </button>
+
+    </section>
+
+
+    <!-- AI VOICE -->
+
+    <section class="card">
+
+      <h2>🎙️ SRT → AI Voice</h2>
+
+      <p class="description">
+        စာသားကို AI Voice အဖြစ် ပြောင်းနိုင်ပါတယ်။
+      </p>
+
+      <textarea
+        id="voiceText"
+        placeholder="AI Voice ပြောင်းချင်တဲ့ စာသားထည့်ပါ..."
+      ></textarea>
+
+      <label for="voiceSelect">
+        Voice
+      </label>
+
+      <select id="voiceSelect">
+        <option value="alloy">Alloy</option>
+        <option value="nova">Nova</option>
+        <option value="shimmer">Shimmer</option>
+        <option value="echo">Echo</option>
+        <option value="fable">Fable</option>
+        <option value="onyx">Onyx</option>
+      </select>
+
+      <button
+        id="voiceBtn"
+        onclick="generateVoice()"
+      >
+        🔊 AI Voice ထုတ်မယ်
+      </button>
+
+      <div id="voiceStatus"></div>
+
+      <audio
+        id="audioPlayer"
+        controls
+        style="display:none;"
+      ></audio>
+
+    </section>
+
+
+    <!-- INFO -->
+
+    <section class="card info">
+
+      <h2>ℹ️ Lynn Movie Recap</h2>
+
+      <p>
+        🎬 Movie Recap မြန်မာစာတန်းထိုး
+      </p>
+
+      <p>
+        🍿 ဇာတ်ကားကောင်းများကို အတိုချုံးတင်ဆက်ပေးနေပါတယ်။
+      </p>
+
+    </section>
+
+  </main>
+
+
+  <footer>
+    © 2026 Lynn Movie Recap
+  </footer>
+
+
+<script>
+
+let latestSRT = "";
+
+
+/* -----------------------------
+   MP4 → SRT
+----------------------------- */
+
+async function transcribeVideo() {
+
+  const fileInput =
+    document.getElementById("videoFile");
+
+  const status =
+    document.getElementById("transcribeStatus");
+
+  const button =
+    document.getElementById("transcribeBtn");
+
+  const output =
+    document.getElementById("srtOutput");
+
+  const file =
+    fileInput.files[0];
+
+  if (!file) {
+
+    status.innerText =
+      "⚠️ MP4 Video ရွေးပေးပါ။";
+
+    return;
+  }
+
+  const formData =
+    new FormData();
+
+  formData.append(
+    "video",
+    file
+  );
+
+  button.disabled = true;
+
+  status.innerText =
+    "⏳ Video ကို စစ်ဆေးပြီး SRT ထုတ်နေပါတယ်...";
+
+  output.value = "";
+
+  try {
+
+    const response =
+      await fetch(
+        "/api/transcribe",
+        {
+          method: "POST",
+          body: formData
+        }
+      );
+
+    const data =
+      await response.json();
+
+    if (!response.ok) {
+
+      throw new Error(
+        data.error ||
+        "Transcription failed"
+      );
+    }
+
+    latestSRT =
+      data.srt || "";
+
+    output.value =
+      latestSRT;
+
+    status.innerText =
+      `✅ SRT ပြီးပါပြီ။ ${data.segments || 0} segments`;
+
+    document
+      .getElementById("downloadSrtBtn")
+      .disabled = !latestSRT;
+
+  } catch (error) {
+
+    status.innerText =
+      "❌ " + error.message;
+
+  } finally {
+
+    button.disabled = false;
+  }
+}
+
+
+/* -----------------------------
+   Download SRT
+----------------------------- */
+
+function downloadSRT() {
+
+  if (!latestSRT) {
+    return;
+  }
+
+  const blob =
+    new Blob(
+      [latestSRT],
+      {
+        type: "text/plain;charset=utf-8"
+      }
+    );
+
+  const url =
+    URL.createObjectURL(blob);
+
+  const link =
+    document.createElement("a");
+
+  link.href = url;
+
+  link.download =
+    "lynn-movie-recap.srt";
+
+  link.click();
+
+  URL.revokeObjectURL(url);
+}
+
+
+/* -----------------------------
+   AI VOICE
+----------------------------- */
+
+async function generateVoice() {
+
+  const text =
+    document
+      .getElementById("voiceText")
+      .value
+      .trim();
+
+  const voice =
+    document
+      .getElementById("voiceSelect")
+      .value;
+
+  const button =
+    document.getElementById("voiceBtn");
+
+  const status =
+    document.getElementById("voiceStatus");
+
+  const player =
+    document.getElementById("audioPlayer");
+
+  if (!text) {
+
+    status.innerText =
+      "⚠️ AI Voice ပြောင်းမယ့် စာသားထည့်ပါ။";
+
+    return;
+  }
+
+  button.disabled = true;
+
+  status.innerText =
+    "⏳ AI Voice ထုတ်နေပါတယ်...";
+
+  player.style.display =
+    "none";
+
+  try {
+
+    const response =
+      await fetch(
+        "/api/tts",
+        {
+          method: "POST",
+
+          headers: {
+            "Content-Type":
+              "application/json"
+          },
+
+          body: JSON.stringify({
+            text,
+            voice
+          })
+        }
+      );
+
+    if (!response.ok) {
+
+      const data =
+        await response.json();
+
+      throw new Error(
+        data.error ||
+        "TTS failed"
+      );
+    }
+
+    const audioBlob =
+      await response.blob();
+
+    const audioUrl =
+      URL.createObjectURL(
+        audioBlob
+      );
+
+    player.src =
+      audioUrl;
+
+    player.style.display =
+      "block";
+
+    status.innerText =
+      "✅ AI Voice ပြီးပါပြီ။";
+
+  } catch (error) {
+
+    status.innerText =
+      "❌ " + error.message;
+
+  } finally {
+
+    button.disabled = false;
+  }
+}
+
+</script>
+
+</body>
+      </html>
